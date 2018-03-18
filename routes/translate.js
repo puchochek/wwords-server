@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* GET translate listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  console.log('word: ', req.query.word);
+  res.send(req.query.word.toUpperCase());
 });
 
 module.exports = router;
