@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -8,7 +9,13 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var translate = require('./routes/translate');
 
+const corsOptions = {
+  origin: ['http://localhost:4200', 'https://wwords.herokuapp.com'],
+  credentials: true
+};
+
 var app = express();
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
