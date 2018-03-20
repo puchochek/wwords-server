@@ -10,7 +10,7 @@ var index = require('./routes/index');
 var translate = require('./routes/translate');
 
 const corsOptions = {
-  origin: ['http://localhost:4200', 'https://wwords.herokuapp.com', 'http://wword.herokuapp.com'],
+  origin: ['http://localhost:4200', 'https://wwords.herokuapp.com'],
   credentials: true
 };
 
