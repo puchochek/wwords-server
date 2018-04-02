@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var translate = require('./routes/translate');
+var words = require('./routes/words');
 
 const corsOptions = {
   origin: ['http://localhost:4200', 'https://wwords.herokuapp.com', 'http://wwords.herokuapp.com'],
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/translate', translate);
+app.use('/words', words);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,16 +6,20 @@ var client = redis.createClient(process.env.REDIS_URL);
 
 /* GET translate listing. */
 router.get('/', function (req, res, next) {
-  
-  client.set('mykey', 'myvalue')
-    .then(console.log)
-    .catch(console.log)
+
+  //Counting number of translation requests//
+  client.get('count')
+    .then((value) => {
+      if (!value) {
+        value = 0;
+      }
+      value++;
+      client.set('count', value);
+    });
 
   let word = req.query.word;
   axios.get('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=' + process.env.KEY + '&lang=en-ru&text=' + word)
     .then(function (response) {
-
-      console.log(response.data.def);
 
       let words = [];
       response.data.def.forEach(defPosition => {
@@ -31,7 +35,7 @@ router.get('/', function (req, res, next) {
       res.send(JSON.stringify(result));
     })
     .catch(function (error) {
-      console.log(error);
+      res.send('Ooops! I didn\'t find anything. ' + error.response.data.message);
     });
 });
 
