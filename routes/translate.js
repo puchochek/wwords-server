@@ -19,9 +19,9 @@ router.get('/', function (req, res, next) {
 
   let word = req.query.word;
   axios.get('https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=' + process.env.KEY + '&lang=en-ru&text=' + word)
-    .then(function (response) {
+    .then((response) => {
 
-      let words = [];
+      let words = [];//Got all translations from def
       response.data.def.forEach(defPosition => {
         defPosition.tr.forEach(tr => {
           words.push(tr.text);
@@ -34,7 +34,7 @@ router.get('/', function (req, res, next) {
 
       res.send(JSON.stringify(result));
     })
-    .catch(function (error) {
+    .catch((error) => {
       res.send('Ooops! I didn\'t find anything. ' + error.response.data.message);
     });
 });

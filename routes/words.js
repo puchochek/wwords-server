@@ -6,8 +6,7 @@ var client = redis.createClient(process.env.REDIS_URL);
 
 /* GET translate listing. */
 router.post('/add', function (req, res, next) {
-  console.log(req.body);
-  client.get('username')
+  client.get('username')//Redis getting translation
     .then((value) => {
       if (!value) {
         value = '{"words": []}';//An ampty array for new user
@@ -19,6 +18,13 @@ router.post('/add', function (req, res, next) {
         .then(() => {
           res.send(JSON.stringify({ status: 'success' }));//Server response
         });
+    });
+});
+
+router.get('/get', function (req, res, next) {
+  client.get('username')//Redis returns saved translation
+    .then((value) => {
+      res.send(value);
     });
 });
 
