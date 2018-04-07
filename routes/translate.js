@@ -28,11 +28,7 @@ router.get('/', function (req, res, next) {
         });
       });
 
-      let result = {
-        words: words
-      };
-
-      res.send(JSON.stringify(result));
+      res.send(words);//Return new array of words
     })
     .catch((error) => {
       res.send('Ooops! I didn\'t find anything. ' + error.response.data.message);
